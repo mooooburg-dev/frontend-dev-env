@@ -1,5 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
+const childProcess = require("child_process");
 
 module.exports = {
   mode: "development",
@@ -31,6 +32,8 @@ module.exports = {
     new webpack.BannerPlugin({
       banner: `
         Build Date: ${new Date().toLocaleString()}
+        Commit Version: ${childProcess.execSync("git rev-parse --short HEAD")}
+        Author: ${childProcess.execSync("git config user.name")}
       `,
     }),
   ],
